@@ -1,0 +1,38 @@
+.github/workflows/release.yml
+  5d787c5f6432dc50 1-85
+bench/run.sh
+  30d4be14c542a9dd 1-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "7207a961036e702052c521ff20af3aade33df3cf",
+  "prompts": {
+    "30d4be14c542a9dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-de57a49d-ea08-4778-9d30-8ff764fb60a2",
+        "model": "unknown"
+      },
+      "human_author": "luolin",
+      "messages": [],
+      "total_additions": 71,
+      "total_deletions": 0,
+      "accepted_lines": 71,
+      "overriden_lines": 0
+    },
+    "5d787c5f6432dc50": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-2008ddf5-6ae4-4c98-9b89-49bbc8539958",
+        "model": "unknown"
+      },
+      "human_author": "luolin",
+      "messages": [],
+      "total_additions": 85,
+      "total_deletions": 0,
+      "accepted_lines": 85,
+      "overriden_lines": 0
+    }
+  }
+}
