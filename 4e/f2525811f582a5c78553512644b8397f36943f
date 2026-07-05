@@ -1,0 +1,23 @@
+.gitignore
+  569c2876fa5e6dd8 14-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "4ef2525811f582a5c78553512644b8397f36943f",
+  "prompts": {
+    "569c2876fa5e6dd8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-3430d3a3-1b2b-4891-a5d4-b38396ac8466",
+        "model": "unknown"
+      },
+      "human_author": "luolin",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 1,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    }
+  }
+}
