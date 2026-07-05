@@ -1,0 +1,199 @@
+src/commands/group.rs
+  ffcf788096e662fb 39
+src/core/discovery.rs
+  73b7ce5f1db689a5 11
+src/core/executor.rs
+  36ea80211aba8540 71
+src/commands/stash.rs
+  68947b2c8656664f 23-24
+src/core/git.rs
+  b8661e0556f8ffc9 149
+src/commands/branch.rs
+  d139f62dff1c33e9 74
+  bdaf84d637489e00 21
+src/commands/diff.rs
+  2bace25a2b5cc09d 10
+src/main.rs
+  f8113f997f2fa559 86-87
+src/commands/init.rs
+  2e76d660b83b8eab 10,13-19
+src/core/output.rs
+  8890460034a16482 162,166-167
+  a6124cdbbd4a57bb 276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "cb58701e3e689440e9b5f897193dfca418910584",
+  "prompts": {
+    "2bace25a2b5cc09d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-2a894efa-c75f-4439-9a3d-0bb84ccde9ff",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "2e76d660b83b8eab": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-9c696799-80fb-4707-8203-050197abcdbc",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 10,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    },
+    "36ea80211aba8540": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-aa6aa991-6613-4d12-bacd-9d4e16056648",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "68947b2c8656664f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-6d746ddc-5811-441d-88b3-ba024e30e43c",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 4,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "73b7ce5f1db689a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-39fc5745-fef8-4ffd-977e-3a31e38b620d",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "8890460034a16482": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-efab6c7f-bd24-446d-a5a4-df673016a973",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 4,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "a6124cdbbd4a57bb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-0db5df39-a833-47c5-8a81-91b495d4dd13",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "b8661e0556f8ffc9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-c9941aa4-82d8-40e7-b24e-b7e125698512",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "bdaf84d637489e00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-44800d64-3eb3-4300-8bcd-3ce20cfe3e5b",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "cb5495149785c29c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-a28d94e4-9066-444b-8b09-3bbc24b47da9",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "d139f62dff1c33e9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-9c4f1f0d-d7cd-4cd7-b76b-49a1f45f03e3",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "f8113f997f2fa559": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-f6e3310d-978b-4c69-82de-bb0ec7daa46d",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "ffcf788096e662fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-27c45394-2743-4682-8484-a4f648036317",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
