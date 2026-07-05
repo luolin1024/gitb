@@ -1,0 +1,96 @@
+README.md
+  414c1df3a286ff8f 3,24,31
+CONTRIBUTING.md
+  f4b76534b5e200c1 8
+CODE_OF_CONDUCT.md
+  a26eafbc08891660 63
+Cargo.toml
+  f206f60b5e66d67c 11-13
+docs/assets/social-preview.svg
+  0ce01494036a2a08 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "ddac19f453610bbca950cd9073d5fe07fa4e38a5",
+  "prompts": {
+    "0ce01494036a2a08": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-f18583e1-fc30-4c03-ad4f-9708f7d1615f",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "1b149270d7be476d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0ce138dc4ffev2SXepoxsWwhTj",
+        "model": "jituhuoshan/glm-5.2"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 146,
+      "total_deletions": 174,
+      "accepted_lines": 146,
+      "overriden_lines": 0
+    },
+    "414c1df3a286ff8f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-39312e4e-1fee-415a-b831-8ee087a155fd",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 3,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "a26eafbc08891660": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-6b8ff1e9-49d9-494e-bba1-e83b2dda0f6e",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "f206f60b5e66d67c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-1e27220d-a28d-4d34-8c15-ab94761c66d7",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 3,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "f4b76534b5e200c1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_0ce138dc4ffev2SXepoxsWwhTj-bc884231-944d-4864-9dd2-5697fb8a98fa",
+        "model": "unknown"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
