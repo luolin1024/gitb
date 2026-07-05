@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+  <rect width="1200" height="640" fill="#0d1117"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#f78166"/>
+  <text x="600" y="260" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="140" fill="#58a6ff" text-anchor="middle" font-weight="bold">gitb</text>
+  <text x="600" y="340" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="38" fill="#c9d1d9" text-anchor="middle">Blazing-fast multi-repo git batch tool</text>
+  <text x="600" y="410" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="28" fill="#8b949e" text-anchor="middle">gitb status  ·  gitb pull -j 8  ·  gitb doctor</text>
+  <text x="600" y="520" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="26" fill="#3fb950" text-anchor="middle">Rust  ·  3-4× faster than gita / mr  ·  MIT</text>
+  <text x="600" y="580" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="20" fill="#6e7681" text-anchor="middle">github.com/luolin1024/gitb</text>
+</svg>
