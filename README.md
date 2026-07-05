@@ -8,7 +8,7 @@
 > Run git across 100+ repos in parallel. Rust-powered, 3-4× faster than `gita` / `mr`.
 > 用 Rust 写的多仓库 Git 批量工具，比 gita / mr 快 3-4 倍。
 
-![demo](docs/assets/gitb-demo.gif)
+![demo](docs/assets/gitb-demo.png)
 
 ## Why gitb?
 
