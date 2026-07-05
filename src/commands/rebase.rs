@@ -18,7 +18,10 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: Option<&str>) -> anyhow::R
                 exit_code: 0,
                 stdout: String::new(),
                 stderr: String::new(),
-                message: format!("[DRY-RUN] Would stash → rebase {} → pop in {}", target_clone, repo.name),
+                message: format!(
+                    "[DRY-RUN] Would stash → rebase {} → pop in {}",
+                    target_clone, repo.name
+                ),
             };
         }
 
@@ -29,7 +32,10 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: Option<&str>) -> anyhow::R
             if stash_result.success {
                 true
             } else {
-                return crate::core::GitResult::fail(&repo.name, "Failed to stash changes before rebase");
+                return crate::core::GitResult::fail(
+                    &repo.name,
+                    "Failed to stash changes before rebase",
+                );
             }
         } else {
             false
@@ -45,7 +51,10 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: Option<&str>) -> anyhow::R
                 git::run_git(&repo.name, &repo.path, &["stash", "pop"]);
             }
             return crate::core::GitResult {
-                message: format!("Rebase failed (aborted, changes restored): {}", rebase_result.stderr.lines().last().unwrap_or("")),
+                message: format!(
+                    "Rebase failed (aborted, changes restored): {}",
+                    rebase_result.stderr.lines().last().unwrap_or("")
+                ),
                 ..rebase_result
             };
         }
@@ -55,14 +64,24 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: Option<&str>) -> anyhow::R
             let pop_result = git::run_git(&repo.name, &repo.path, &["stash", "pop"]);
             if !pop_result.success {
                 return crate::core::GitResult {
-                    message: format!("Rebased, but stash pop failed: {}", pop_result.stderr.lines().last().unwrap_or("")),
+                    message: format!(
+                        "Rebased, but stash pop failed: {}",
+                        pop_result.stderr.lines().last().unwrap_or("")
+                    ),
                     success: false,
                     ..pop_result
                 };
             }
         }
 
-        crate::core::GitResult::ok(&repo.name, &format!("Rebased onto {}{}", target_clone, if stashed { " (stash restored)" } else { "" }))
+        crate::core::GitResult::ok(
+            &repo.name,
+            &format!(
+                "Rebased onto {}{}",
+                target_clone,
+                if stashed { " (stash restored)" } else { "" }
+            ),
+        )
     });
 
     output::print_results(&results, opts.output, opts.quiet);

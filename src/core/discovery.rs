@@ -13,8 +13,7 @@ use std::path::{Path, PathBuf};
 ///
 /// Returns a sorted list of Repo objects.
 pub fn discover_repos(root: &Path, depth: usize, skip: &[String]) -> Vec<Repo> {
-    let skip_set: std::collections::HashSet<&str> =
-        skip.iter().map(|s| s.as_str()).collect();
+    let skip_set: std::collections::HashSet<&str> = skip.iter().map(|s| s.as_str()).collect();
 
     let mut repos = Vec::new();
     scan_dir(root, depth, &skip_set, &mut repos);
@@ -75,6 +74,5 @@ pub fn is_git_repo(path: &Path) -> bool {
 
 /// Get the absolute path of the current working directory.
 pub fn current_dir() -> anyhow::Result<PathBuf> {
-    std::env::current_dir()
-        .map_err(|e| anyhow::anyhow!("Failed to get current directory: {}", e))
+    std::env::current_dir().map_err(|e| anyhow::anyhow!("Failed to get current directory: {}", e))
 }

@@ -1,7 +1,7 @@
 // gitb create <branch>: batch create+switch branch across repos
 
-use crate::core::{executor, git, output, GlobalOpts, Repo};
 use crate::core::executor::exec_git_on_repo;
+use crate::core::{executor, git, output, GlobalOpts, Repo};
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: &str) -> anyhow::Result<()> {
     executor::print_header(opts, &format!("Creating branch: {}", branch));
@@ -38,7 +38,8 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: &str) -> anyhow::Result<()
 
         if result.success && !opts.dry_run {
             // Try to push with -u (don't fail if push fails)
-            let push_result = git::run_git(&repo.name, &repo.path, &["push", "-u", "origin", &branch]);
+            let push_result =
+                git::run_git(&repo.name, &repo.path, &["push", "-u", "origin", &branch]);
             if push_result.success {
                 return crate::core::GitResult {
                     message: format!("Created {} and pushed to remote", branch),

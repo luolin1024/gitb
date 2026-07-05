@@ -13,7 +13,8 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
 
     let results = executor::execute_parallel(repos, opts, "Diff", |repo| {
         let diff_output = git::run_git_capture(&repo.path, &["diff"]).unwrap_or_default();
-        let staged_output = git::run_git_capture(&repo.path, &["diff", "--cached"]).unwrap_or_default();
+        let staged_output =
+            git::run_git_capture(&repo.path, &["diff", "--cached"]).unwrap_or_default();
 
         let has_changes = !diff_output.is_empty() || !staged_output.is_empty();
         let total_lines = diff_output.lines().count() + staged_output.lines().count();

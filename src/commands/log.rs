@@ -12,7 +12,8 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, number: usize) -> anyhow::Result<(
         let log_output = if opts.dry_run {
             String::new()
         } else {
-            git::run_git_capture(&repo.path, &["log", "--oneline", "-n", &n_str]).unwrap_or_default()
+            git::run_git_capture(&repo.path, &["log", "--oneline", "-n", &n_str])
+                .unwrap_or_default()
         };
 
         let count = log_output.lines().count();

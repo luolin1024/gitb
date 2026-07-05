@@ -1,11 +1,14 @@
 // gitb doctor: health check across repos
 
-use crate::core::{executor, git, GlobalOpts, Repo};
 use crate::core::output::{print_doctor_report, DoctorRow};
+use crate::core::{executor, git, GlobalOpts, Repo};
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
     if opts.dry_run {
-        println!("\n[DRY-RUN] Would run health check on {} repos", repos.len());
+        println!(
+            "\n[DRY-RUN] Would run health check on {} repos",
+            repos.len()
+        );
         return Ok(());
     }
 

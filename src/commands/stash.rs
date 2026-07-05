@@ -1,8 +1,8 @@
 // gitb stash [push|pop|list|clear]: batch stash operations
 
 use crate::cli::StashAction;
-use crate::core::{executor, git, output, GlobalOpts, Repo};
 use crate::core::executor::exec_git_on_repo;
+use crate::core::{executor, git, output, GlobalOpts, Repo};
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts, action: Option<StashAction>) -> anyhow::Result<()> {
     let action = action.unwrap_or(StashAction::Push);
@@ -43,7 +43,8 @@ fn run_pop(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
     let results = executor::execute_parallel(repos, opts, "Pop", |repo| {
         // Check if there's a stash to pop
         if !opts.dry_run {
-            let stash_list = git::run_git_capture(&repo.path, &["stash", "list"]).unwrap_or_default();
+            let stash_list =
+                git::run_git_capture(&repo.path, &["stash", "list"]).unwrap_or_default();
             if stash_list.is_empty() {
                 return crate::core::GitResult::ok(&repo.name, "No stash to pop");
             }
@@ -72,7 +73,11 @@ fn run_list(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
             git::run_git_capture(&repo.path, &["stash", "list"]).unwrap_or_default()
         };
 
-        let count = if stash_list.is_empty() { 0 } else { stash_list.lines().count() };
+        let count = if stash_list.is_empty() {
+            0
+        } else {
+            stash_list.lines().count()
+        };
 
         crate::core::GitResult {
             repo_name: repo.name.clone(),
@@ -121,7 +126,8 @@ fn run_clear(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
 
     let results = executor::execute_parallel(repos, opts, "Clear", |repo| {
         if !opts.dry_run {
-            let stash_list = git::run_git_capture(&repo.path, &["stash", "list"]).unwrap_or_default();
+            let stash_list =
+                git::run_git_capture(&repo.path, &["stash", "list"]).unwrap_or_default();
             if stash_list.is_empty() {
                 return crate::core::GitResult::ok(&repo.name, "No stash to clear");
             }

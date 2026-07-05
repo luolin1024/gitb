@@ -1,7 +1,7 @@
 // gitb commit -m <msg> [-a]: batch commit across repos
 
-use crate::core::{executor, git, output, GlobalOpts, Repo};
 use crate::core::executor::exec_git_on_repo;
+use crate::core::{executor, git, output, GlobalOpts, Repo};
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts, message: &str, all: bool) -> anyhow::Result<()> {
     let title = format!("Committing: \"{}\"", message);
@@ -30,7 +30,10 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, message: &str, all: bool) -> anyho
                     if !git::is_dirty(&repo.path) {
                         return crate::core::GitResult::ok(&repo.name, "Nothing to commit (clean)");
                     }
-                    return crate::core::GitResult::ok(&repo.name, "Nothing staged (use -a to stage all)");
+                    return crate::core::GitResult::ok(
+                        &repo.name,
+                        "Nothing staged (use -a to stage all)",
+                    );
                 }
                 // all=true but nothing staged after git add -A = nothing to commit
                 return crate::core::GitResult::ok(&repo.name, "Nothing to commit (clean)");

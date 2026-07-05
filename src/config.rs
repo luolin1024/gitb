@@ -47,8 +47,9 @@ impl WorkspaceConfig {
             let config_path = current.join("gitb.toml");
             if config_path.exists() {
                 let content = std::fs::read_to_string(&config_path)?;
-                let config: WorkspaceConfig = toml::from_str(&content)
-                    .map_err(|e| anyhow::anyhow!("Failed to parse {}: {}", config_path.display(), e))?;
+                let config: WorkspaceConfig = toml::from_str(&content).map_err(|e| {
+                    anyhow::anyhow!("Failed to parse {}: {}", config_path.display(), e)
+                })?;
                 return Ok(config);
             }
             if !current.pop() {
@@ -73,7 +74,11 @@ impl WorkspaceConfig {
             Some(group) => {
                 let name_set: std::collections::HashSet<&str> =
                     group.repos.iter().map(|s| s.as_str()).collect();
-                repos.iter().filter(|r| name_set.contains(r.name.as_str())).cloned().collect()
+                repos
+                    .iter()
+                    .filter(|r| name_set.contains(r.name.as_str()))
+                    .cloned()
+                    .collect()
             }
             None => {
                 eprintln!("Warning: group '{}' not found in gitb.toml", group_name);

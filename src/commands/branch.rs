@@ -1,16 +1,18 @@
 // gitb branch list / gitb branch delete <name>: cross-repo branch operations
 
 use crate::cli::BranchAction;
-use crate::core::{executor, git, output, GlobalOpts, Repo};
 use crate::core::executor::exec_git_on_repo;
+use crate::core::{executor, git, output, GlobalOpts, Repo};
 use colored::*;
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts, action: BranchAction) -> anyhow::Result<()> {
     match action {
         BranchAction::List => run_list(repos, opts),
-        BranchAction::Delete { name, force, remote } => {
-            run_delete(repos, opts, &name, force, remote)
-        }
+        BranchAction::Delete {
+            name,
+            force,
+            remote,
+        } => run_delete(repos, opts, &name, force, remote),
     }
 }
 
@@ -18,7 +20,10 @@ fn run_list(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
     executor::print_header(opts, "Branch listing");
 
     if opts.dry_run {
-        println!(" [DRY-RUN] Would list branches across {} repos", repos.len());
+        println!(
+            " [DRY-RUN] Would list branches across {} repos",
+            repos.len()
+        );
         return Ok(());
     }
 
@@ -87,7 +92,11 @@ fn run_delete(
     remote: bool,
 ) -> anyhow::Result<()> {
     let flag = if force { "-D" } else { "-d" };
-    let title = format!("Deleting branch: {} {}", if remote { "(local+remote)" } else { "(local)" }, name);
+    let title = format!(
+        "Deleting branch: {} {}",
+        if remote { "(local+remote)" } else { "(local)" },
+        name
+    );
     executor::print_header(opts, &title);
     executor::print_skip_info(opts, &opts.skip);
 
@@ -106,8 +115,21 @@ fn run_delete(
 
         if !local_result.success && !opts.dry_run {
             // Branch might not exist in this repo - not an error
-            if git::run_git_capture(&repo.path, &["show-ref", "--verify", "--quiet", &format!("refs/heads/{}", name_local)]).is_none() {
-                return crate::core::GitResult::ok(&repo.name, &format!("No local branch '{}' to delete", name_local));
+            if git::run_git_capture(
+                &repo.path,
+                &[
+                    "show-ref",
+                    "--verify",
+                    "--quiet",
+                    &format!("refs/heads/{}", name_local),
+                ],
+            )
+            .is_none()
+            {
+                return crate::core::GitResult::ok(
+                    &repo.name,
+                    &format!("No local branch '{}' to delete", name_local),
+                );
             }
         }
 

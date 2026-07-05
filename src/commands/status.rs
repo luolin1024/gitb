@@ -1,12 +1,16 @@
 // gitb status: colored multi-repo overview (gita-ll style)
 
-use crate::core::{git, GlobalOpts, Repo};
 use crate::core::output::{print_status_table, StatusRow};
+use crate::core::{git, GlobalOpts, Repo};
 use colored::*;
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts) -> anyhow::Result<()> {
     if opts.dry_run {
-        println!("\n{} [DRY-RUN] Would show status of {} repos", "Status".bold(), repos.len());
+        println!(
+            "\n{} [DRY-RUN] Would show status of {} repos",
+            "Status".bold(),
+            repos.len()
+        );
         return Ok(());
     }
 

@@ -3,7 +3,7 @@ mod commands;
 mod config;
 mod core;
 
-use clap::{Parser, CommandFactory};
+use clap::{CommandFactory, Parser};
 use clap_complete::{generate, Shell};
 use cli::{Cli, Command};
 use config::WorkspaceConfig;
@@ -44,7 +44,10 @@ fn main() -> anyhow::Result<()> {
     let mut repos = discovery::discover_repos(&cwd, opts.depth, &skip_dirs);
 
     if repos.is_empty() {
-        eprintln!("No git repositories found in current directory (depth={}).", opts.depth);
+        eprintln!(
+            "No git repositories found in current directory (depth={}).",
+            opts.depth
+        );
         eprintln!("Try increasing depth with -d <N> or run in a different directory.");
         std::process::exit(1);
     }
@@ -68,9 +71,7 @@ fn main() -> anyhow::Result<()> {
         Command::Push => commands::sync::run_push(&repos, &opts),
         Command::Exec { args } => commands::exec::run(&repos, &opts, &args),
         Command::Branch { action } => commands::branch::run(&repos, &opts, action),
-        Command::Commit { message, all } => {
-            commands::commit::run(&repos, &opts, &message, all)
-        }
+        Command::Commit { message, all } => commands::commit::run(&repos, &opts, &message, all),
         Command::Stash { action } => commands::stash::run(&repos, &opts, action),
         Command::Rebase { branch } => commands::rebase::run(&repos, &opts, branch.as_deref()),
         Command::Diff => commands::diff::run(&repos, &opts),
@@ -110,7 +111,10 @@ fn run_completion(shell: &str) -> anyhow::Result<()> {
         "powershell" | "pwsh" => Shell::PowerShell,
         "elvish" => Shell::Elvish,
         _ => {
-            eprintln!("Unsupported shell: {}. Supported: bash, zsh, fish, powershell, elvish", shell);
+            eprintln!(
+                "Unsupported shell: {}. Supported: bash, zsh, fish, powershell, elvish",
+                shell
+            );
             std::process::exit(1);
         }
     };

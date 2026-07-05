@@ -1,7 +1,7 @@
 // gitb checkout <branch>: batch switch branch across repos
 
-use crate::core::{executor, git, output, GlobalOpts, Repo};
 use crate::core::executor::exec_git_on_repo;
+use crate::core::{executor, git, output, GlobalOpts, Repo};
 
 pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: &str) -> anyhow::Result<()> {
     executor::print_header(opts, &format!("Checking out branch: {}", branch));
@@ -37,11 +37,11 @@ pub fn run(repos: &[Repo], opts: &GlobalOpts, branch: &str) -> anyhow::Result<()
 
         // Fuzzy match: find a branch that contains the pattern
         if !opts.dry_run {
-            if let Some(branches) = git::run_git_capture(&repo.path, &["branch", "--list", "--all", "--format=%(refname:short)"]) {
-                let matched: Vec<&str> = branches
-                    .lines()
-                    .filter(|b| b.contains(&branch))
-                    .collect();
+            if let Some(branches) = git::run_git_capture(
+                &repo.path,
+                &["branch", "--list", "--all", "--format=%(refname:short)"],
+            ) {
+                let matched: Vec<&str> = branches.lines().filter(|b| b.contains(&branch)).collect();
                 if matched.len() == 1 {
                     let matched_branch = matched[0].trim_start_matches("origin/");
                     return exec_git_on_repo(

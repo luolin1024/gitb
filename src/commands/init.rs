@@ -10,10 +10,11 @@ pub fn run(opts: &GlobalOpts) -> anyhow::Result<()> {
     println!("===========================\n");
 
     // Check if gitb.toml already exists
-    if WorkspaceConfig::exists_in_cwd() && !Confirm::new()
-        .with_prompt("gitb.toml already exists. Overwrite?")
-        .default(false)
-        .interact()?
+    if WorkspaceConfig::exists_in_cwd()
+        && !Confirm::new()
+            .with_prompt("gitb.toml already exists. Overwrite?")
+            .default(false)
+            .interact()?
     {
         println!("Aborted.");
         return Ok(());
@@ -21,11 +22,18 @@ pub fn run(opts: &GlobalOpts) -> anyhow::Result<()> {
 
     // Discover repos in current directory
     let cwd = discovery::current_dir()?;
-    println!("Scanning for git repos in {} (depth={})...\n", cwd.display(), opts.depth);
+    println!(
+        "Scanning for git repos in {} (depth={})...\n",
+        cwd.display(),
+        opts.depth
+    );
     let repos = discovery::discover_repos(&cwd, opts.depth, &[]);
 
     if repos.is_empty() {
-        eprintln!("{} No git repositories found in current directory.", "✗".red());
+        eprintln!(
+            "{} No git repositories found in current directory.",
+            "✗".red()
+        );
         eprintln!("Try running gitb init in a directory containing git repos, or use -d to increase depth.");
         std::process::exit(1);
     }
@@ -67,9 +75,7 @@ pub fn run(opts: &GlobalOpts) -> anyhow::Result<()> {
         .interact()?
     {
         loop {
-            let group_name: String = Input::new()
-                .with_prompt("Group name")
-                .interact()?;
+            let group_name: String = Input::new().with_prompt("Group name").interact()?;
 
             let repo_names: Vec<String> = repos.iter().map(|r| r.name.clone()).collect();
             let selections = MultiSelect::new()
@@ -77,8 +83,14 @@ pub fn run(opts: &GlobalOpts) -> anyhow::Result<()> {
                 .items(&repo_names)
                 .interact()?;
 
-            let selected_repos: Vec<String> = selections.iter().map(|i| repo_names[*i].clone()).collect();
-            groups.insert(group_name.clone(), GroupDef { repos: selected_repos });
+            let selected_repos: Vec<String> =
+                selections.iter().map(|i| repo_names[*i].clone()).collect();
+            groups.insert(
+                group_name.clone(),
+                GroupDef {
+                    repos: selected_repos,
+                },
+            );
 
             println!();
 

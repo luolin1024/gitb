@@ -24,7 +24,11 @@ pub fn run_git(repo_name: &str, repo_path: &Path, args: &[&str]) -> GitResult {
             let message = if success {
                 stdout.lines().last().unwrap_or("").to_string()
             } else {
-                stderr.lines().last().unwrap_or("git command failed").to_string()
+                stderr
+                    .lines()
+                    .last()
+                    .unwrap_or("git command failed")
+                    .to_string()
             };
 
             GitResult {
@@ -140,7 +144,12 @@ pub fn get_ahead_behind(repo_path: &Path) -> (usize, usize) {
         None => return (0, 0),
     };
     let output = Command::new("git")
-        .args(["rev-list", "--left-right", "--count", &format!("{}...{}", &local, &upstream)])
+        .args([
+            "rev-list",
+            "--left-right",
+            "--count",
+            &format!("{}...{}", &local, &upstream),
+        ])
         .current_dir(repo_path)
         .output();
     match output {

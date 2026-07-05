@@ -22,7 +22,12 @@ fn run_add(config: &WorkspaceConfig, name: &str, repos: &[String]) -> anyhow::Re
     let mut config = config.clone();
     config.add_group(name, repos.to_vec());
     config.save()?;
-    println!("{} Added group '{}' with {} repo(s)", "✓".green(), name.cyan(), repos.len());
+    println!(
+        "{} Added group '{}' with {} repo(s)",
+        "✓".green(),
+        name.cyan(),
+        repos.len()
+    );
     for r in repos {
         println!("  - {}", r);
     }

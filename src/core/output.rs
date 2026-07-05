@@ -19,7 +19,11 @@ fn print_table(results: &[GitResult], _quiet: bool) {
     }
 
     for r in results {
-        let status_icon = if r.success { "✓".green() } else { "✗".red() };
+        let status_icon = if r.success {
+            "✓".green()
+        } else {
+            "✗".red()
+        };
         let repo_colored = if r.success {
             r.repo_name.normal()
         } else {
@@ -116,11 +120,11 @@ pub struct StatusRow {
 /// Determine branch state for color coding
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BranchState {
-    NoRemote,  // no upstream tracking
-    Synced,    // up to date with upstream
-    Ahead,     // local commits not pushed
-    Behind,    // remote commits not pulled
-    Diverged,  // both ahead and behind
+    NoRemote, // no upstream tracking
+    Synced,   // up to date with upstream
+    Ahead,    // local commits not pushed
+    Behind,   // remote commits not pulled
+    Diverged, // both ahead and behind
 }
 
 impl StatusRow {
@@ -164,14 +168,14 @@ pub fn print_status_table(rows: &[StatusRow]) {
     // Header
     println!(
         "  {:<nw$}  {:<bw$}  {:<8}  {:<8}  LAST COMMIT",
-        "REPO", "BRANCH", "SYNC", "CHANGES",
+        "REPO",
+        "BRANCH",
+        "SYNC",
+        "CHANGES",
         nw = name_width,
         bw = branch_width,
     );
-    println!(
-        "  {}",
-        "-".repeat(name_width + branch_width + 40)
-    );
+    println!("  {}", "-".repeat(name_width + branch_width + 40));
 
     for row in rows {
         let state = row.branch_state();
@@ -219,7 +223,11 @@ pub fn print_status_table(rows: &[StatusRow]) {
 
         // Truncate branch name if too long
         let branch_display: String = if row.branch.chars().count() > branch_width {
-            row.branch.chars().take(branch_width - 1).collect::<String>() + "…"
+            row.branch
+                .chars()
+                .take(branch_width - 1)
+                .collect::<String>()
+                + "…"
         } else {
             row.branch.clone()
         };
@@ -300,11 +308,7 @@ pub fn print_doctor_report(rows: &[DoctorRow]) {
     let clean = rows.iter().filter(|r| r.issues.is_empty()).count();
     let with_issues = rows.len() - clean;
     if total_issues == 0 {
-        println!(
-            "  {} All {} repos are healthy",
-            "✓".green(),
-            rows.len()
-        );
+        println!("  {} All {} repos are healthy", "✓".green(), rows.len());
     } else {
         println!(
             "  {} {} issue(s) across {} repo(s), {} clean",
