@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "3d941249b68822b7068d0d9f188552dc093991e6",
+  "prompts": {
+    "1b149270d7be476d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0ce138dc4ffev2SXepoxsWwhTj",
+        "model": "jituhuoshan/glm-5.2"
+      },
+      "human_author": "luolin1024",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 30,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
