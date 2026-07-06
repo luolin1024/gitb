@@ -18,85 +18,38 @@
 
 ## Install
 
-### Download prebuilt binary / 下载预编译二进制
-
-Download the right file from [GitHub Releases v0.3.0](https://github.com/luolin1024/git-batch/releases/tag/v0.3.0).
-从 GitHub Release 下载对应平台的文件：
-
-| Platform / 平台 | File / 文件 |
-|---|---|
-| Linux x86_64 | `gitb-x86_64-linux` |
-| Linux ARM64 / aarch64 | `gitb-aarch64-linux` |
-| macOS Intel | `gitb-x86_64-macos` |
-| macOS Apple Silicon | `gitb-aarch64-macos` |
-| Windows x86_64 | `gitb-x86_64-windows.exe` |
-
-Linux:
+**macOS / Linux — one command:**
 
 ```bash
-curl -L -o gitb https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-linux
-chmod +x gitb
-sudo mv gitb /usr/local/bin/gitb
+curl -fsSL https://github.com/luolin1024/git-batch/raw/main/install.sh | bash
 ```
 
-Use `gitb-aarch64-linux` on ARM64 Linux.
-ARM64 Linux 请把文件名换成 `gitb-aarch64-linux`。
+**Windows (PowerShell) — one command:**
 
-macOS:
+```powershell
+irm https://github.com/luolin1024/git-batch/raw/main/install.ps1 | iex
+```
+
+**macOS Homebrew:**
 
 ```bash
 brew install luolin1024/git-batch/gitb
 ```
 
-Windows PowerShell:
+**Windows Scoop:**
 
 ```powershell
-New-Item -ItemType Directory -Force "$HOME\bin"
-Invoke-WebRequest -Uri "https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe" -OutFile "$HOME\bin\gitb.exe"
-$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
-if ($UserPath -notlike "*$HOME\bin*") { [Environment]::SetEnvironmentVariable("Path", "$UserPath;$HOME\bin", "User") }
+scoop bucket add gitb https://github.com/luolin1024/git-batch
+scoop install gitb
 ```
 
-Open a new terminal after updating `PATH`.
-修改 `PATH` 后请重新打开终端。
-
-### Scoop / Windows 包管理器
-
-Create `gitb.json`:
-
-```json
-{
-  "version": "0.3.0",
-  "description": "Blazing-fast cross-platform multi-repository git batch tool",
-  "homepage": "https://github.com/luolin1024/git-batch",
-  "license": "MIT",
-  "architecture": {
-    "64bit": {
-      "url": "https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe#/gitb.exe",
-      "hash": "<sha256>"
-    }
-  },
-  "bin": "gitb.exe"
-}
-```
-
-Then install it:
-
-```powershell
-scoop hash https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe
-scoop install .\gitb.json
-```
-
-Replace `<sha256>` with the release file SHA-256.
-请将 `<sha256>` 替换为发布文件的 SHA-256。
-
-### Cargo install / 通过 Cargo 安装
+**Cargo (Rust developers):**
 
 ```bash
 cargo install gitb
 ```
 
-### Verify installation / 验证安装
+Verify:
 
 ```bash
 gitb --version
@@ -111,6 +64,23 @@ cd git-batch
 cargo build --release
 # Binary at ./target/release/gitb
 ```
+</details>
+
+<details>
+<summary>Manual download</summary>
+
+Download the right file from [GitHub Releases](https://github.com/luolin1024/git-batch/releases/latest):
+
+| Platform | File |
+|---|---|
+| Linux x86_64 | `gitb-x86_64-linux` |
+| Linux ARM64 | `gitb-aarch64-linux` |
+| macOS Intel | `gitb-x86_64-macos` |
+| macOS Apple Silicon | `gitb-aarch64-macos` |
+| Windows x86_64 | `gitb-x86_64-windows.exe` |
+
+Linux/macOS: `chmod +x gitb && sudo mv gitb /usr/local/bin/`
+Windows: place `gitb.exe` anywhere in your `PATH`.
 </details>
 
 ## Quick start (30 seconds)
@@ -149,90 +119,45 @@ gitb doctor        # health check: who's behind / dirty / unpushed
 ### Basic Commands
 
 ```bash
-# Show status of all repos in current directory
-gitb status
-
-# Pull latest changes in all repos (8 parallel jobs)
-gitb pull -j 8
-
-# Checkout a branch across all repos (fuzzy matching)
-gitb checkout main
-
-# Create and switch to a new branch
-gitb create feature/new-feature
-
-# Fetch from remote
-gitb fetch
-
-# Push to remote
-gitb push
-
-# Execute arbitrary git commands
-gitb exec log --oneline -5
-gitb exec remote -v
-
-# Commit with message
-gitb commit -m "fix: update dependencies"
-
-# Stash operations
-gitb stash push
-gitb stash pop
-gitb stash list
-gitb stash clear
-
-# Smart rebase (stashes dirty changes, rebases, then unstashes)
-gitb rebase
-gitb rebase -b main
-
-# Show diff across all repos
-gitb diff
-
-# Show commit log (last 10 commits per repo)
-gitb log -n 10
-
-# Branch management
-gitb branch list
-gitb branch delete old-feature
-gitb branch delete old-feature -f     # force delete
-gitb branch delete old-feature --remote  # also delete from remote
-
-# Health check
-gitb doctor
+gitb status                    # show status of all repos
+gitb pull -j 8                 # pull all in parallel (8 jobs)
+gitb checkout main             # switch to branch (fuzzy match)
+gitb create feature/new        # create and switch to new branch
+gitb fetch                     # fetch from remote
+gitb push                      # push to remote
+gitb exec log --oneline -5     # run any git command
+gitb commit -m "fix: update"   # commit changes
+gitb stash push                 # stash changes
+gitb stash pop                  # pop stash
+gitb rebase                     # smart rebase (auto-stash)
+gitb rebase -b main             # rebase onto specific branch
+gitb diff                       # show diff
+gitb log -n 10                  # show last 10 commits per repo
+gitb branch list                # list branches
+gitb branch delete old-feature  # delete branch (-f force, --remote also remote)
+gitb doctor                     # health check
 ```
 
 ### Group Management
 
 ```bash
-# Add a group
 gitb group add frontend repo-a,repo-b,repo-c
-
-# List groups
 gitb group list
-
-# Show repos in a group
 gitb group show frontend
-
-# Remove a group
 gitb group remove frontend
-
-# Run commands filtered by group
-gitb status -g frontend
+gitb status -g frontend          # filter by group
 gitb pull -g frontend
 ```
 
 ### Workspace Initialization
 
 ```bash
-# Interactive init
-gitb init
-
-# After init, use gitb.toml for configuration
+gitb init    # interactive setup, generates gitb.toml
 ```
 
 ### Shell Completion
 
 ```bash
-# Generate completion scripts
 gitb completion bash > ~/.bash_completion.d/gitb
 gitb completion zsh > /usr/local/share/zsh/site-functions/_gitb
 gitb completion fish > ~/.config/fish/completions/gitb.fish
@@ -255,7 +180,7 @@ gitb completion powershell >> $PROFILE
 
 ## Configuration (gitb.toml)
 
-Place `gitb.toml` in your workspace root. It is optional -- gitb works with zero config.
+Optional — gitb works with zero config. Place `gitb.toml` in your workspace root:
 
 ```toml
 [workspace]
@@ -268,14 +193,9 @@ repos = ["web-app", "mobile-app", "ui-kit"]
 
 [groups.backend]
 repos = ["api-gateway", "user-service", "payment-service"]
-
-[groups.docs]
-repos = ["docs", "website"]
 ```
 
 ## Performance
-
-gitb is written in Rust and uses parallel execution via rayon. It is significantly faster than Python-based alternatives (e.g., `gita`, `mr`) for large numbers of repositories.
 
 | Tool          | Language | 50 repos (pull) | 100 repos (status) |
 |---------------|----------|-----------------|--------------------|
@@ -293,6 +213,20 @@ gitb is written in Rust and uses parallel execution via rayon. It is significant
 | [gita](https://github.com/nosarthur/gita) | Python | ✅ | ✅ | ✅ | partial | ❌ |
 | [myrepos (mr)](https://myrepos.branchable.com/) | Perl | ✅ | ❌ config file | ✅ | ❌ | ❌ |
 | [mu-repo](https://github.com/fabioz/mu-repo) | Python | ✅ | ✅ | ✅ | ❌ | ❌ |
+
+## FAQ
+
+**Q: `gitb` not found after install?**
+A: Restart your terminal so PATH changes take effect.
+
+**Q: Can't find my repos?**
+A: Default scan depth is 1. Use `-d 2` or `-d 3` for nested directories.
+
+**Q: Not sure what a command will do?**
+A: Add `--dry-run` to preview without executing.
+
+**Q: Skip certain directories?**
+A: `-s node_modules,target,.vscode` (comma-separated).
 
 ## Contributing
 

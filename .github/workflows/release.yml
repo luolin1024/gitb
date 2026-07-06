@@ -98,6 +98,12 @@ jobs:
         shell: bash
         run: find artifacts/ -type f
 
+      - name: Copy install scripts
+        run: |
+          cp install.sh artifacts/
+          cp install.ps1 artifacts/
+          cp scoop/gitb.json artifacts/
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
