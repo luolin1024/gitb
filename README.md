@@ -18,10 +18,88 @@
 
 ## Install
 
+### Download prebuilt binary / 下载预编译二进制
+
+Download the right file from [GitHub Releases v0.3.0](https://github.com/luolin1024/git-batch/releases/tag/v0.3.0).
+从 GitHub Release 下载对应平台的文件：
+
+| Platform / 平台 | File / 文件 |
+|---|---|
+| Linux x86_64 | `gitb-x86_64-linux` |
+| Linux ARM64 / aarch64 | `gitb-aarch64-linux` |
+| macOS Intel | `gitb-x86_64-macos` |
+| macOS Apple Silicon | `gitb-aarch64-macos` |
+| Windows x86_64 | `gitb-x86_64-windows.exe` |
+
+Linux:
+
+```bash
+curl -L -o gitb https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-linux
+chmod +x gitb
+sudo mv gitb /usr/local/bin/gitb
+```
+
+Use `gitb-aarch64-linux` on ARM64 Linux.
+ARM64 Linux 请把文件名换成 `gitb-aarch64-linux`。
+
+macOS:
+
+```bash
+brew install luolin1024/git-batch/gitb
+```
+
+Windows PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\bin"
+Invoke-WebRequest -Uri "https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe" -OutFile "$HOME\bin\gitb.exe"
+$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($UserPath -notlike "*$HOME\bin*") { [Environment]::SetEnvironmentVariable("Path", "$UserPath;$HOME\bin", "User") }
+```
+
+Open a new terminal after updating `PATH`.
+修改 `PATH` 后请重新打开终端。
+
+### Scoop / Windows 包管理器
+
+Create `gitb.json`:
+
+```json
+{
+  "version": "0.3.0",
+  "description": "Blazing-fast cross-platform multi-repository git batch tool",
+  "homepage": "https://github.com/luolin1024/git-batch",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe#/gitb.exe",
+      "hash": "<sha256>"
+    }
+  },
+  "bin": "gitb.exe"
+}
+```
+
+Then install it:
+
+```powershell
+scoop hash https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe
+scoop install .\gitb.json
+```
+
+Replace `<sha256>` with the release file SHA-256.
+请将 `<sha256>` 替换为发布文件的 SHA-256。
+
+### Cargo install / 通过 Cargo 安装
+
 ```bash
 cargo install gitb
-# or, on macOS:
-brew install luolin1024/git-batch/gitb
+```
+
+### Verify installation / 验证安装
+
+```bash
+gitb --version
 ```
 
 <details>
@@ -29,7 +107,7 @@ brew install luolin1024/git-batch/gitb
 
 ```bash
 git clone https://github.com/luolin1024/git-batch.git
-cd gitb
+cd git-batch
 cargo build --release
 # Binary at ./target/release/gitb
 ```
@@ -65,21 +143,6 @@ gitb doctor        # health check: who's behind / dirty / unpushed
 | `group`     | Manage repo groups                            | 管理仓库分组                       |
 | `init`      | Initialize workspace config interactively      | 交互式初始化工作区配置             |
 | `completion`| Generate shell completion scripts             | 生成 Shell 补全脚本                |
-
-## Installation
-
-### Cargo Install
-
-```bash
-cargo install gitb
-```
-
-### Build from Source
-
-```bash
-cargo build --release
-# Binary at ./target/release/gitb
-```
 
 ## Usage
 
