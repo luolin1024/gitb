@@ -3,9 +3,9 @@
 #   irm https://github.com/luolin1024/git-batch/raw/main/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
-$VERSION = "v0.3.0"
+$VERSION = "v0.3.1"
 $REPO = "luolin1024/git-batch"
-$FILE = "gitb-x86_64-windows.exe"
+$FILE = "gitb.exe"
 
 # Install to ~/bin (create if needed)
 $InstallDir = "$HOME\bin"

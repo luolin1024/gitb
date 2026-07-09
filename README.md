@@ -18,22 +18,22 @@
 
 ## Install
 
-**macOS / Linux — one command:**
-
-```bash
-curl -fsSL https://github.com/luolin1024/git-batch/raw/main/install.sh | bash
-```
-
-**Windows (PowerShell) — one command:**
-
-```powershell
-irm https://github.com/luolin1024/git-batch/raw/main/install.ps1 | iex
-```
-
 **macOS Homebrew:**
 
 ```bash
 brew install luolin1024/git-batch/gitb
+```
+
+**Linux / macOS Cargo:**
+
+```bash
+cargo install gitb
+```
+
+**Windows PowerShell:**
+
+```powershell
+irm https://github.com/luolin1024/git-batch/raw/main/install.ps1 | iex
 ```
 
 **Windows Scoop:**
@@ -41,12 +41,6 @@ brew install luolin1024/git-batch/gitb
 ```powershell
 scoop bucket add gitb https://github.com/luolin1024/git-batch
 scoop install gitb
-```
-
-**Cargo (Rust developers):**
-
-```bash
-cargo install gitb
 ```
 
 Verify:
@@ -73,13 +67,8 @@ Download the right file from [GitHub Releases](https://github.com/luolin1024/git
 
 | Platform | File |
 |---|---|
-| Linux x86_64 | `gitb-x86_64-linux` |
-| Linux ARM64 | `gitb-aarch64-linux` |
-| macOS Intel | `gitb-x86_64-macos` |
-| macOS Apple Silicon | `gitb-aarch64-macos` |
-| Windows x86_64 | `gitb-x86_64-windows.exe` |
+| Windows x86_64 | `gitb.exe` |
 
-Linux/macOS: `chmod +x gitb && sudo mv gitb /usr/local/bin/`
 Windows: place `gitb.exe` anywhere in your `PATH`.
 </details>
 

@@ -10,78 +10,30 @@ permissions:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            artifact: gitb-x86_64-linux
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            artifact: gitb-aarch64-linux
-          - os: macos-latest
-            target: x86_64-apple-darwin
-            artifact: gitb-x86_64-macos
-          - os: macos-latest
-            target: aarch64-apple-darwin
-            artifact: gitb-aarch64-macos
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            artifact: gitb-x86_64-windows.exe
-
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.target }}
 
       - name: Cache cargo dependencies
         uses: Swatinem/rust-cache@v2
 
-      - name: Install cross-linker for aarch64 Linux
-        if: matrix.target == 'aarch64-unknown-linux-gnu'
-        run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
-
-      - name: Configure aarch64 Linux linker
-        if: matrix.target == 'aarch64-unknown-linux-gnu'
-        run: |
-          mkdir -p ~/.cargo
-          cat >> ~/.cargo/config.toml << EOF
-          [target.aarch64-unknown-linux-gnu]
-          linker = "aarch64-linux-gnu-gcc"
-          EOF
-
       - name: Build release binary
-        run: cargo build --release --target ${{ matrix.target }}
-
-      - name: Strip binary (unix)
-        if: runner.os != 'Windows'
-        run: |
-          if [ "${{ matrix.target }}" = "aarch64-unknown-linux-gnu" ]; then
-            aarch64-linux-gnu-strip target/${{ matrix.target }}/release/gitb
-          else
-            strip target/${{ matrix.target }}/release/gitb
-          fi
+        run: cargo build --release
 
       - name: Rename binary
         shell: bash
         run: |
           mkdir -p artifacts
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            cp target/${{ matrix.target }}/release/gitb.exe artifacts/${{ matrix.artifact }}
-          else
-            cp target/${{ matrix.target }}/release/gitb artifacts/${{ matrix.artifact }}
-          fi
+          cp target/release/gitb.exe artifacts/gitb.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact }}
-          path: artifacts/${{ matrix.artifact }}
+          name: gitb.exe
+          path: artifacts/gitb.exe
 
   release:
     needs: build
@@ -97,12 +49,6 @@ jobs:
       - name: List artifacts
         shell: bash
         run: find artifacts/ -type f
-
-      - name: Copy install scripts
-        run: |
-          cp install.sh artifacts/
-          cp install.ps1 artifacts/
-          cp scoop/gitb.json artifacts/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

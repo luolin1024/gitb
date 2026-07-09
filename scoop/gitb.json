@@ -1,11 +1,11 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Blazing-fast cross-platform multi-repository git batch tool",
   "homepage": "https://github.com/luolin1024/git-batch",
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/luolin1024/git-batch/releases/download/v0.3.0/gitb-x86_64-windows.exe#/gitb.exe",
+      "url": "https://github.com/luolin1024/git-batch/releases/download/v0.3.1/gitb.exe",
       "hash": "08596a85c34e4745d49510e55c2f5be9b0295e2bbcf74693f79479e93f1209f5"
     }
   },
@@ -14,7 +14,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://github.com/luolin1024/git-batch/releases/download/$version/gitb-x86_64-windows.exe#/gitb.exe"
+        "url": "https://github.com/luolin1024/git-batch/releases/download/$version/gitb.exe"
       }
     }
   }
